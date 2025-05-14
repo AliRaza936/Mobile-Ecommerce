@@ -119,7 +119,7 @@ const Navbar = () => {
                      
                       
                    </div>
-                   <div className='w-[40%] xs:hidden sm:hidden md:hidden nlg:block'>
+                   <div className='w-[40%] xs:hidden sm:hidden md:hidden hlg:block'>
                     <ul className='flex justify-evenly w-full'>
                       <Link to={'all-products'}>
                       <li className=' md:text-[14px] font-semibold uppercase text-white'>

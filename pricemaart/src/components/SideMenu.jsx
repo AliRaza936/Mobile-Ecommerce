@@ -40,7 +40,7 @@ const SideMenu = () => {
       {/* Toggle Button */}
       <button
         onClick={toggleMenu}
-        className="  p-2 md:mr-5 md:-ml-1  nlg:hidden"
+        className="  p-2 md:mr-5 md:-ml-1  hlg:hidden"
       >
          <Menu className="text-white w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9" />
       </button>

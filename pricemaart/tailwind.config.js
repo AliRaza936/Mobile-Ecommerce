@@ -12,6 +12,7 @@ export default {
       'md': '768px',
       'lg': '1024px',
       'nlg': '1080px',
+      'hlg': '1180px',
       'xl': '1280px',
       '2xl': '1536px',
       'tab': '560px',  // Your custom 560px breakpoint
