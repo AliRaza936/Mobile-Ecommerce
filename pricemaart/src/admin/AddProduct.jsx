@@ -374,7 +374,7 @@ console.log(inputForm)
 
 
             let result = await axios.post(
-                "${BASE_URL}/products/create",
+                `${BASE_URL}/products/create`,
                 formData,
                 {
                     withCredentials: true,
