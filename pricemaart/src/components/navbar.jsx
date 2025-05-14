@@ -164,7 +164,7 @@ const Navbar = () => {
                         <IoIosSearch   className=' text-[20px] xs:text-[16px] sm:text-[15px] md:text-[17px] text-white'/>
                       </div>
                     </div>
-                    <Link to={'/wishList'} className='hidden   w-[35px]   h-[35px] border-2 py-2 nlg:flex justify-center items-center cursor-pointer rounded-full'>
+                    <Link to={'/wishList'} className='hidden   w-[35px]   h-[35px] border-2 py-2 hlg:flex justify-center items-center cursor-pointer rounded-full'>
                       <div>
                         <FaRegHeart className='nlg:text-[18px]  xs:text-[13px] sm:text-[15px] text-white'/>
                       </div>
