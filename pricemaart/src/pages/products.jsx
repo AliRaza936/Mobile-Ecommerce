@@ -10,6 +10,7 @@ import ProductPopup from "../components/ProductPopup";
 import { MyContext } from "../App";
 import BASE_URL from "../../apiConfig";
 import LoaderOverlay from "../components/LoaderOverlay";
+import format from 'format-number'
 
 const Products = ({product}) => {
   let navigate = useNavigate()
@@ -110,8 +111,8 @@ let context = useContext(MyContext)
      {product?.name?.substring(0,25)}
      </span>
      <div className='flex gap-1 xsp:flex-col xsp:gap-0 xs:text-[12px]'>
-         <p className='line-through xsp:text-red-400 text-gray-500'>Rs.{product?.oldprice}</p>
-         <span>Rs.{product?.price}</span>
+         <p className='line-through xsp:text-red-400 text-gray-500'>Rs.{format()(product?.oldprice)}</p>
+         <span>Rs.{format()(product?.price)}</span>
      </div>
      <div className='flex gap-3 mt-2'>
       {

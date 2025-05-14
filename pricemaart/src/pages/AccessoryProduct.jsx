@@ -11,7 +11,7 @@ import { MyContext } from "../App";
 import AccessoryPopup from "../components/AccessoryPopup";
 import BASE_URL from "../../apiConfig";
 import LoaderOverlay from "../components/LoaderOverlay";
-
+import format from 'format-number'
 const AccessoryProduct = ({product}) => {
   let navigate = useNavigate()
   let [isOpen,setIsOpen] = useState(false)
@@ -111,8 +111,9 @@ let context = useContext(MyContext)
      {product?.name}
      </span>
      <div className='flex gap-1 xsp:flex-col xsp:gap-0 xs:text-[12px]'>
-         <p className='line-through xsp:text-red-400 text-gray-500'>Rs.{product?.oldprice}</p>
-         <span>Rs.{product?.price}</span>
+         <p className='line-through xsp:text-red-400 text-gray-500'>Rs.{format()(product?.oldprice)}</p>
+                  <span>Rs.{format()(product?.price)}</span>
+         
      </div>
      <div className='flex gap-3 mt-2'>
       {
