@@ -1,3 +1,3 @@
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://mobile-ecommerce-10eg.onrender.com";
 
 export default BASE_URL;
