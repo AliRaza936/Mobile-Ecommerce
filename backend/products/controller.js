@@ -142,6 +142,7 @@ const allProducts = async (req, res) => {
     let products = await productModel
       .find(filter)
       .populate("category productRAM")
+       .sort({ createdAt: -1 })
       .skip((page - 1) * perPage)
       .limit(perPage);
 
