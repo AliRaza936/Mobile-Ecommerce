@@ -1,0 +1,320 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --primary-color: #35a7fa; /* Default Blue Color */
+    --background-color: #0084f6; /* Default Background Color */
+  }
+  .bg-primary{
+    background-color: var(--primary-color);
+  }
+  .text-primary{
+    color: var(--primary-color);
+  }
+  .text-secondary{
+   color: var(--background-color);
+
+  }
+  .bg-secondary{
+    background-color: var(--background-color);
+
+  }
+  .hover\:bg-secondary:hover {
+    background-color: var(--background-color);
+  }
+  .hover\:text-primary:hover {
+   color: var(--primary-color);
+  }
+  body{
+    background-color: white;
+  }
+  
+.slick-next:before{
+  width: 50px;
+  height: 50px;
+ 
+  background-color: rgb(89, 83, 83);
+  border-radius: 50% ;
+  display: flex;
+  color: black ;
+  justify-content: center;
+  font-size:25px !important;
+  /* opacity: 0.5 !important; */
+  align-items: center;
+  top: 50%;
+  transform: translateY(-70%);
+  position: absolute;
+  font-size:2rem !important;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
+  right: 30px;
+
+}
+.slick-prev:before{
+  width: 50px;
+  height: 50px;
+  /* opacity: 0.5 !important; */
+ 
+  background-color: rgb(89, 83, 83);
+  border-radius: 50% ;
+  display: flex;
+  color: black ;
+  justify-content: center;
+  
+  align-items: center;
+  font-size:2rem !important;
+font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-70%);
+
+  left: 30px;
+
+}
+.slick-arrow {
+  position: absolute;
+  
+  z-index:1;
+
+}
+.swiper-button-prev:after{
+  /* height: 50px; */
+  /* padding: 8px; */
+position: absolute;
+left: -8px;
+  /* border-radius: 50%; */
+  /* font-size: 1rem !important; */
+}
+
+.css-1qltlow-MuiTabs-indicator{
+  background-color: var(--primary-color) !important;
+
+}
+
+.css-1645ah2-MuiButtonBase-root-MuiTab-root.Mui-selected {
+  color: var(--primary-color)  !important;
+
+}
+.css-hvjq6j-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+  color: var(--primary-color)  !important;
+}
+.css-1blp12k-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
+  border-color:  var(--primary-color)  !important;;
+
+
+}
+.css-cmpglg-MuiFormControl-root-MuiTextField-root{
+  background-color: rgba(239, 239, 244, 0.546) !important;
+}
+
+.css-1usuzwp-MuiButtonBase-root-MuiTab-root.Mui-selected{
+  color: var(--primary-color)  !important;
+
+}
+
+.loader{
+  width: 25px !important;
+  height: 25px !important;
+  display: flex !important;
+  justify-items: center !important;
+  align-items: center !important;
+}
+
+.loading {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* in your global.css or component */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #979a9d; /* Change thumb color */
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #838080; /* Thumb hover */
+}
+
+::-webkit-scrollbar-track {
+  background: #def2f8; /* Track color */
+  border-radius: 8px;
+}
+
+/* Force the dialog container to stretch full width */
+.productModel .MuiDialog-container {
+  width: 100vw !important;
+  margin: 0 !important;
+  padding: 10px !important;
+  align-items: flex-start !important;
+}
+
+/* Force the dialog itself (Paper) to fill screen */
+.productModel .MuiPaper-root {
+  width: 100vw !important;
+  height: auto !important;
+  max-height: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+/* Optional: Make it scroll naturally */
+body {
+  overflow-x: hidden;
+}
+
+/* Add this CSS to your global styles or within a <style> block in your component */
+
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+
+.menuBtn{
+   
+    border-radius: 50% !important;
+    height: 60px;
+    background-color: rgb(236, 255, 236) !important;
+    zoom:60%;
+}
+/* .myAcc{
+    color: black !important;
+
+} */
+
+
+
+
+.sideBar ul li button{
+    color: rgb(76, 73, 73);
+    text-transform: none;
+    font-size: 17px;
+    font-weight: 600;
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+   
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+}
+.sideBar ul li button:hover {
+    background-color:rgb(209, 243, 209) ;
+
+}
+.sideBar ::-webkit-scrollbar-thumb{
+    background-color: transparent;
+
+}
+.sideBar:hover ::-webkit-scrollbar-thumb{
+    background-color: green;
+
+}
+
+.sideBar .active{
+    background-color:rgb(209, 243, 209) ;
+
+    
+}
+
+
+.sideBar .submenu::before{
+    content: '';
+    width: 1px;
+    height: 95%;
+    position: absolute;
+    top: 0;
+    left: -15px;
+    margin-top: 2px;
+    background-color: rgb(105, 99, 99);
+}
+.logout::before{
+    content: '';
+    width: 70px;
+    height: 70px;
+    background-color: rgb(60, 218, 60);
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    border-radius: 50%;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.logout::after{
+    content: '';
+    width: 40px;
+    height: 40px;
+    background-color: rgb(60, 218, 60);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  
+    border-radius: 50%;
+}
+
+ tbody {
+     border: 1px solid rgba(159, 144, 144, 0.434);
+     border-collapse: collapse;
+  }
+td {
+    border-inline: 1px solid rgba(159, 144, 144, 0.434);;
+     /* border: 1px solid rgba(159, 144, 144, 0.434); */
+     /* border-collapse: collapse; */
+  }
+.subList{
+    border: none;
+}
+  .full{
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+  }
+  .loader{
+    width: 30px !important;
+    height: 30px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* .css-1bug3cd-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+    color: #fff;
+    background-color: #59c94b !important;
+} */
+.topLoadingBar{
+    height: 4px !important;
+  
+} 
