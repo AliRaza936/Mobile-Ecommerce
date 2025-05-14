@@ -106,62 +106,36 @@ let singleCategory = async (req, res) => {
     });
   }
 };
-
 let deleteCategory = async (req, res) => {
   try {
     let { categoryId } = req.params;
-
+    
     // Find the category
     let category = await categoryModel.findById(categoryId);
     if (!category) {
       return res.status(404).send({ success: false, message: "Category Not Found" });
     }
 
-    // Delete each category image from Cloudinary with validation
-    for (let img of category.images) {
-      let publicId = img.split('/').slice(-2).join('/').split('.').at(-2);
+    // Delete images from Cloudinary
+    try {
+      await Promise.all(
+        category.images.map(async (img) => {
+          let publicId = img.split('/').slice(-2).join('/').split('.').at(-2);
+          await deleteImageFromCloudinary(publicId);
+        })
+      );
 
-      try {
-        let response = await deleteImageFromCloudinary(publicId);
-        if (!response || response.result !== "ok") {
-          return res.status(500).send({
-            success: false,
-            message: `Failed to delete category image: ${img}`,
-            cloudinaryResponse: response,
-          });
-        }
-      } catch (cloudinaryError) {
-        return res.status(500).send({
-          success: false,
-          message: `Error deleting category image`,
-          error: cloudinaryError.message || cloudinaryError,
-        });
+      // Delete banner from Cloudinary
+      if (category.banner) {
+        let bannerPublicId = category.banner.split('/').slice(-2).join('/').split('.').at(-2);
+        await deleteImageFromCloudinary(bannerPublicId);
       }
+
+    } catch (error) {
+      return res.status(500).send({ success: false, message: "Error deleting images", error });
     }
 
-    // Delete banner from Cloudinary (if exists), with validation
-    if (category.banner) {
-      let bannerPublicId = category.banner.split('/').slice(-2).join('/').split('.').at(-2);
-
-      try {
-        let bannerResponse = await deleteImageFromCloudinary(bannerPublicId);
-        if (!bannerResponse || bannerResponse.result !== "ok") {
-          return res.status(500).send({
-            success: false,
-            message: "Failed to delete category banner",
-            cloudinaryResponse: bannerResponse,
-          });
-        }
-      } catch (bannerError) {
-        return res.status(500).send({
-          success: false,
-          message: "Error deleting category banner",
-          error: bannerError.message || bannerError,
-        });
-      }
-    }
-
-    // All Cloudinary deletions successful, now delete the category
+    // Delete category from database
     await categoryModel.findByIdAndDelete(categoryId);
 
     return res.status(200).send({
@@ -173,12 +147,10 @@ let deleteCategory = async (req, res) => {
     return res.status(500).send({
       success: false,
       message: "Error deleting category",
-      error: error.message || error,
+      error: error.message,
     });
   }
 };
-
-
 let updateCategory = async (req, res) => {
   try {
     let { categoryId } = req.params;

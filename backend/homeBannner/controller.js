@@ -102,33 +102,17 @@ let deleteBanner = async (req, res) => {
   try {
     let { bannerId } = req.params;
     let banner = await bannerModel.findById(bannerId);
-
     if (!banner) {
       return res.status(404).send({ success: false, message: "Banner not found" });
     }
 
-    // Extract the publicId from imageUrl
     let publicId = banner.imageUrl.split("/").slice(-2).join("/").split(".").at(-2);
-
-    // Try deleting the image from Cloudinary
-    const cloudinaryResponse = await deleteImageFromCloudinary(publicId);
-console.log(cloudinaryResponse)
-    // Optional: If your deleteImageFromCloudinary function returns a status object, check it
-    if (!cloudinaryResponse?.result || cloudinaryResponse.result !== "ok") {
-      return res.status(500).send({
-        success: false,
-        message: "Failed to delete image from Cloudinary",
-        cloudinaryResponse
-      });
-    }
-
-    // Proceed to delete the banner from the database only if image deletion succeeded
+    await deleteImageFromCloudinary(publicId);
     await bannerModel.findByIdAndDelete(bannerId);
 
     return res.status(200).send({ success: true, message: "Banner deleted successfully" });
-
   } catch (error) {
-    console.log(error);
+    console.log(error)
     return res.status(500).send({ success: false, message: "Error in deleting banner", error });
   }
 };

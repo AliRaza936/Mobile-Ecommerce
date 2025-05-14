@@ -102,42 +102,17 @@ let deleteBanner = async (req, res) => {
   try {
     let { bannerId } = req.params;
     let banner = await saleBannerModel.findById(bannerId);
-
     if (!banner) {
       return res.status(404).send({ success: false, message: "Banner not found" });
     }
 
-    // Extract publicId from image URL
     let publicId = banner.imageUrl.split("/").slice(-2).join("/").split(".").at(-2);
-console.log(publicId)
-    // Attempt to delete the image from Cloudinary
-    let cloudinaryResponse;
-    try {
-      cloudinaryResponse = await deleteImageFromCloudinary(publicId);
-    } catch (cloudinaryError) {
-      return res.status(500).send({
-        success: false,
-        message: "Failed to delete image from Cloudinary",
-        error: cloudinaryError.message || cloudinaryError
-      });
-    }
-
-    // If deletion result is not 'ok', do not proceed
-    if (!cloudinaryResponse || cloudinaryResponse.result !== "ok") {
-      return res.status(500).send({
-        success: false,
-        message: "Cloudinary did not confirm successful deletion",
-        response: cloudinaryResponse
-      });
-    }
-
-    // Delete the banner from the database
+    await deleteImageFromCloudinary(publicId);
     await saleBannerModel.findByIdAndDelete(bannerId);
 
     return res.status(200).send({ success: true, message: "Banner deleted successfully" });
-
   } catch (error) {
-    console.log(error);
+    console.log(error)
     return res.status(500).send({ success: false, message: "Error in deleting banner", error });
   }
 };

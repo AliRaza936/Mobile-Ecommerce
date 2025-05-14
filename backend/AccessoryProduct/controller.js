@@ -228,47 +228,27 @@ let deleteProduct = async (req, res) => {
   try {
     let { productId } = req.params;
     let product = await productModel.findById(productId);
-
     if (!product) {
-      return res.status(404).send({ success: false, message: "Product not found" });
+      return res
+        .status(404)
+        .send({ success: false, message: "product not Found", error });
     }
-
-    // Delete each product image from Cloudinary with validation
-    for (let img of product.images) {
+    const deletePromises = product.images.map((img) => {
       let publicId = img.split("/").slice(-2).join("/").split(".").at(-2);
+      return deleteImageFromCloudinary(publicId);
+    });
 
-      try {
-        let response = await deleteImageFromCloudinary(publicId);
-        if (!response || response.result !== "ok") {
-          return res.status(500).send({
-            success: false,
-            message: `Failed to delete image from Cloudinary`,
-            cloudinaryResponse: response
-          });
-        }
-      } catch (cloudinaryError) {
-        return res.status(500).send({
-          success: false,
-          message: `Error deleting image from Cloudinary`,
-          error: cloudinaryError.message || cloudinaryError
-        });
-      }
-    }
-
-    // All image deletions successful, now delete product from DB
+    await Promise.all(deletePromises);
     await productModel.findByIdAndDelete(productId);
 
-    return res.status(200).send({
+    return res.status(201).send({
       success: true,
-      message: "Product deleted successfully",
+      message: "product delete successfully",
     });
-
   } catch (error) {
-    return res.status(500).send({
-      success: false,
-      message: "Error deleting product",
-      error: error.message || error,
-    });
+    return res
+      .status(500)
+      .send({ success: false, message: "Error in delete product", error });
   }
 };
 
