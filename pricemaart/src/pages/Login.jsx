@@ -29,7 +29,7 @@ const Login = () => {
   let handleChange = (e) => {
     setformField({
       ...formField,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value.trim()
     })
   }
 
@@ -96,14 +96,14 @@ signInWithPopup(auth, googleProvider)
     e.preventDefault()
 
     
-    if (formField.email == '') {
+    if (formField.email.trim() == '') {
 
       context.setOpen({ open: true, message: 'email cannot be blank!', severity: 'error' })
 
       return
     }
 
-    if (formField.password == '') {
+    if (formField.password.trim() == '') {
 
       context.setOpen({ open: true, message: 'password cannot be blank!', severity: 'error' })
 
@@ -111,8 +111,11 @@ signInWithPopup(auth, googleProvider)
     }
 
     setIsLoading(true);
-
-     dispatch(login(formField))
+let payload = {
+  email : formField.email.trim(),
+  password : formField.password.trim(),
+}
+     dispatch(login(payload))
           .unwrap()
           .then((response) => {
             
