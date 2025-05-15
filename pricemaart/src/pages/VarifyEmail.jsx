@@ -63,11 +63,11 @@ let navigate = useNavigate()
       return;
     }
     const verificationData = {
-        email: formField.email,  // Ensure email is correctly set
+        email: formField.email.trim(),  // Ensure email is correctly set
         otpCode: enteredOtp,
       };
     
-    console.log('kdask',verificationData)
+
       dispatch(verify(verificationData))
           .unwrap()
           .then((response) => {

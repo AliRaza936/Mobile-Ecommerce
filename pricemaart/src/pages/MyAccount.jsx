@@ -92,7 +92,7 @@ const MyAccount = () => {
               },
             }
           );
-          console.log(result)
+         
           setIsLoading(false)
          context.setOpen({open:true,message:result?.data?.message,severity:'success'})
         
@@ -116,11 +116,16 @@ const MyAccount = () => {
           
       let userId = JSON.parse(localStorage.getItem('user')).userId
 
-          
+          const trimmedPasswordData = {
+    oldPassword: passwordData.oldPassword.trim(),
+    newPassword: passwordData.newPassword.trim(),
+    confirmPassword: passwordData.confirmPassword.trim(),
+  };
+
           try {
             let result = await axios.put(
               `${BASE_URL}/user/changePassword/${userId}`,
-              passwordData,
+              trimmedPasswordData,
               {
               
                     
@@ -130,7 +135,7 @@ const MyAccount = () => {
                 },
               }
             );
-            console.log(result)
+            
             setIsLoading(false)
            context.setOpen({open:true,message:result?.data?.message,severity:'success'})
            setPasswordData({

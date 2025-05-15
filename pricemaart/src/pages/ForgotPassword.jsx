@@ -31,8 +31,12 @@ let context = useContext(MyContext)
   const handleRequestOTP = (e) => {
     e.preventDefault();
     // Call API to send OTP to email
+      const payload = {
+    email: formField.email.trim(),
+  };
+
 setLoading(true)
-         dispatch(forgot(formField))
+         dispatch(forgot(payload))
          .unwrap()
          .then((response) => {
           
@@ -59,56 +63,56 @@ setLoading(false)
     
   };
 
-  const handleResetPassword = (e) => {
-    e.preventDefault();
+ const handleResetPassword = (e) => {
+  e.preventDefault();
+  setError("");
 
-    setError("");
+  const trimmedOtp = formField.otpCode.trim();
+  const trimmedPassword = formField.password.trim();
+  const trimmedConfirmPassword = formField.confirmPassword.trim();
 
-    if (formField.otpCode.length !== 6) {
-      setError("OTP must be exactly 6 digits.");
-      return;
-    }
-    if(formField.password =='' ){
+  if (trimmedOtp.length !== 6) {
+    setError("OTP must be exactly 6 digits.");
+    return;
+  }
 
-        context?.setOpen?.({open:true,message:'password cannot be blank!',severity:'error'})
-        
-        return
-        }
-        if(formField.confirmPassword =='' ){
-        
-        context?.setOpen?.({open:true,message:'confirm password cannot be blank!',severity:'error'})
-        
-        return
-        }
-        if(formField.password != formField.confirmPassword ){
-        
-        context?.setOpen?.({open:true,message:'Both password not match',severity:'error'})
-        
-        return
-        }
-        dispatch(reset(formField))
-        .unwrap()
-        .then((response) => {
-          console.log(response);
-      
-          if (response?.success === true) {
-      
-            context?.setOpen?.({ open: true, message: response.message, severity: "success" });
- 
-            navigate('/login')
-          } else {
-            context?.setOpen?.({ open: true, message: response?.message, severity: "error" });
-   
-          }
-        })
-        .catch((error) => {
-        
-          context?.setOpen?.({ open: true, message: error, severity: "error" });
-         
-        });
-   
+  if (trimmedPassword === '') {
+    context?.setOpen?.({ open: true, message: "Password cannot be blank!", severity: "error" });
+    return;
+  }
 
+  if (trimmedConfirmPassword === '') {
+    context?.setOpen?.({ open: true, message: "Confirm password cannot be blank!", severity: "error" });
+    return;
+  }
+
+  if (trimmedPassword !== trimmedConfirmPassword) {
+    context?.setOpen?.({ open: true, message: "Both passwords do not match", severity: "error" });
+    return;
+  }
+
+  const payload = {
+    email: formField.email.trim(),
+    otpCode: trimmedOtp,
+    password: trimmedPassword,
+    confirmPassword: trimmedConfirmPassword,
   };
+
+  dispatch(reset(payload))
+    .unwrap()
+    .then((response) => {
+      if (response?.success === true) {
+        context?.setOpen?.({ open: true, message: response.message, severity: "success" });
+        navigate("/login");
+      } else {
+        context?.setOpen?.({ open: true, message: response?.message, severity: "error" });
+      }
+    })
+    .catch((error) => {
+      context?.setOpen?.({ open: true, message: error, severity: "error" });
+    });
+};
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
