@@ -18,6 +18,8 @@ const Products = ({product}) => {
   let [loading,setLoading] = useState(false)
   let [productData,setProductData] = useState({})
   const dispatch = useDispatch();
+  let [reviewData,setReviewData] = useState({})
+
   const wishlist = useSelector((state) => state.wishlist) || [];
 let context = useContext(MyContext)
   // Check if product is already in wishlist
@@ -63,14 +65,42 @@ let context = useContext(MyContext)
     
     }
     }
+     let allReviews = async (id)=>{
+       
+    
+      try {
+    
+        let result = await axios.get(`${BASE_URL}/review/all`,{
+          params: {
+              productId: id
+            },
+        },{
+         
+          withCredentials:true,
+          headers:{
+            'Content-Type':"application/json"
+          }
+        })
+
+        setReviewData(result?.data?.reviews)
+      
+      } catch (error) {
+        console.log(error)
+      }
+    
+      }
     let viewProductDetails = (id)=>{
       if(!loading){
 
         setIsOpen(true)
       }
-    
-      getSingleProd(id)
+  allReviews(id)
+getSingleProd(id)
     }
+  const averageRating = reviewData.length
+? Math.floor((reviewData.reduce((acc, r) => acc + r.rating, 0) / reviewData.length) * 10) / 10
+: 0;
+
   return (
     
    
@@ -132,7 +162,7 @@ let context = useContext(MyContext)
    </div>
    <LoaderOverlay loading={loading}/>
    {
-       isOpen && !loading && <ProductPopup  productId = {product?._id} productData = {productData} closeViewProduct={closeViewProduct}/>
+       isOpen && !loading && <ProductPopup averageRating={averageRating}  productId = {product?._id} productData = {productData} closeViewProduct={closeViewProduct}/>
       }
  </div>
    

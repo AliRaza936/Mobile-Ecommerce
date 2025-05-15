@@ -34,7 +34,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ProductPopup = ({ closeViewProduct ,productData,productId}) => {
+const ProductPopup = ({ closeViewProduct ,productData,productId,averageRating}) => {
   console.log(productData)
 let context = useContext(MyContext)
 let dispatch = useDispatch()
@@ -88,7 +88,7 @@ let id = productId
               setProductDetails(productData.product);
             }
           }, [productData]);
-  const ratingValue  = productData?.product?.rating ||0
+
   let changeColor = (col,i)=>{
     setColor(col)
     setChangeImage(i)
@@ -143,8 +143,8 @@ useEffect(() => {
             <div>
               <Rating
                 name="half-rating-read"
-                value={ratingValue}
-                precision={0.5}
+                value={averageRating}
+                precision={0.1}
                 readOnly ={true}
               />
             </div>

@@ -33,7 +33,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const AccessoryPopup = ({ closeViewProduct ,productData,productId}) => {
+const AccessoryPopup = ({ closeViewProduct ,productData,productId,averageRating}) => {
   console.log(productData)
 let context = useContext(MyContext)
 let dispatch = useDispatch()
@@ -78,18 +78,18 @@ let hanldeAddToCart = ()=>{
     context.setOpen({open:true,message:'product add in cart',severity:'success'})
 
   }
-  console.log('anfalk',loading)
+ 
   let {name,price,images,discount} = productDetails
   let productType = true
   let modelType = 'AccessoryProduct'
   let pictureUrl = images[0]
         useEffect(() => {
-            console.log(productData)
+          
             if (productData && productData.product) {
               setProductDetails(productData.product);
             }
           }, [productData]);
-  const ratingValue  = productData?.product?.rating ||0
+
   let changeColor = (col,i)=>{
     setColor(col)
     setChangeImage(i)
@@ -146,8 +146,8 @@ useEffect(() => {
              <div>
                <Rating
                  name="half-rating-read"
-                 value={ratingValue}
-                 precision={0.5}
+                 value={averageRating}
+                 precision={0.1}
                  readOnly ={true}
                  size="medium"
                />
