@@ -239,12 +239,10 @@ function App() {
         }, 3000)
         
         }
-  
+  setLoading(false)
     } catch (error) {
       console.error("Error fetching user data:", error);
-
-    }.finally {
-      setLoading(false);
+setLoading(false)
     }
   };
   // let [message,setMess');
