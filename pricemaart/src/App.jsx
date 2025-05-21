@@ -234,11 +234,14 @@ function App() {
         setTimeout(() => {
           // setMessage('');
           navigate('/'); // Redirect to homepage
-        }, 3000);
+        }, 3000)
+        if(result?.data?.success== false){
+          setRole("user")
+        }
   
     } catch (error) {
       console.error("Error fetching user data:", error);
-      setRole("user")
+      
         
     }
     } finally {
