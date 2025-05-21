@@ -228,24 +228,26 @@ function App() {
   console.log(result.data.user.role)
       // Check if the current pathname is for an admin route and if the user is an admin
       const currentPath = window.location.pathname;
-      if (currentPath.startsWith('/admin') && result?.data?.user?.role !== 'admin' && result?.data?.user?.role !== 'testAdmin' && !result?.data?.user) {
+      if (currentPath.startsWith('/admin') && result?.data?.user?.role !== 'admin' && result?.data?.user?.role !== 'testAdmin') {
         console.warn("Access denied. Redirecting to homepage.");
         // setMessage('You are not authorized to access this page.');
         setTimeout(() => {
           // setMessage('');
           navigate('/'); // Redirect to homepage
         }, 3000);
-        
-      }
   
     } catch (error) {
       console.error("Error fetching user data:", error);
+      setRole("user")
+        
+    }
     } finally {
       setLoading(false);
     }
   };
-  // let [message,setMessage] = useState('')
-  // // Call the function inside useEffect to trigger on mount
+  // let [message,setMess');
+        setTimeout(() => {
+          // setMessect to trigger on mount
 
   // if (message) {
   //   return (
