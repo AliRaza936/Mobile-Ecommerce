@@ -248,7 +248,7 @@ function App() {
     }
   };
   // let [message,setMess');
-        setTimeout(() => {
+     //   setTimeout(() => {
           // setMessect to trigger on mount
 
   // if (message) {
