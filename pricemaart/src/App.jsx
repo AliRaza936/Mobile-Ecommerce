@@ -221,7 +221,9 @@ function App() {
           },
         }
       );
-  
+  if(result?.data?.success== false){
+      setRole("user")
+        }    
       console.log('ndalfnl',result.data.user);
       setUserData(result?.data?.user);
   setRole(result?.data?.user?.role )
@@ -234,18 +236,18 @@ function App() {
         setTimeout(() => {
           // setMessage('');
           navigate('/'); // Redirect to homepage
-        }, 3000);
+        }, 3000)
         
-      }
-  
+        }
+  setLoading(false)
     } catch (error) {
       console.error("Error fetching user data:", error);
-    } finally {
-      setLoading(false);
+setLoading(false)
     }
   };
-  // let [message,setMessage] = useState('')
-  // // Call the function inside useEffect to trigger on mount
+  // let [message,setMess');
+     //   setTimeout(() => {
+          // setMessect to trigger on mount
 
   // if (message) {
   //   return (
