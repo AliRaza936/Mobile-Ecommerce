@@ -68,6 +68,7 @@ signInWithPopup(auth, googleProvider)
               context.setOpen({ open: true, message: response?.message, severity: "success" });
              
               setIsLoading(false);
+              context.setRole(user.role)
               setTimeout(() => {
                 
 
@@ -125,6 +126,7 @@ let payload = {
               context.setOpen({ open: true, message: response?.message, severity: "success" });
              let user  = response.user
               setIsLoading(false);
+              context.setRole(user.role)
               setTimeout(() => {
                 
 

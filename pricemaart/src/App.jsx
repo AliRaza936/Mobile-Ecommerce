@@ -84,7 +84,7 @@ function App() {
   let forgot = location.pathname.startsWith('/forgot-password')
   let isAmdin = location.pathname.startsWith('/admin')
   let LoginSignup = location.pathname.startsWith('/signup') || location.pathname.startsWith('/login')
-  let [role,setRole] = useState('admin')
+  let [role,setRole] = useState('none')
 
   const [progress, setProgress] = useState(0);
 
