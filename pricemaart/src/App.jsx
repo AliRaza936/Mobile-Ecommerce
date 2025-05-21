@@ -221,7 +221,9 @@ function App() {
           },
         }
       );
-  
+  if(result?.data?.success== false){
+      setRole("user")
+        }    
       console.log('ndalfnl',result.data.user);
       setUserData(result?.data?.user);
   setRole(result?.data?.user?.role )
@@ -235,8 +237,7 @@ function App() {
           // setMessage('');
           navigate('/'); // Redirect to homepage
         }, 3000)
-        if(result?.data?.success== false){
-          setRole("user")
+        
         }
   
     } catch (error) {
@@ -244,7 +245,7 @@ function App() {
       
         
     }
-    } finally {
+    }.finally {
       setLoading(false);
     }
   };
