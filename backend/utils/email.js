@@ -4,32 +4,27 @@ import getVerificationEmailTemplate from "./verificationEmailTemplate.js";
 
 dotenv.config();
 
-const mailer = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
-
 const sendEmail = async (email, subject, otpCode) => {
   try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
+
     const mailOptions = {
-      from: `"Pricemaart" <${process.env.SMTP_USER}>`,
+      from: '"Pricemaart" <yourcompany@example.com>',
       to: email,
       subject,
       html: getVerificationEmailTemplate(otpCode, subject),
     };
 
-    const info = await mailer.sendMail(mailOptions);
-    console.log("✅ Verification email sent successfully!");
-    console.log("📦 Full Info:", info);
-    console.log("📨 Message ID:", info.messageId || "(not returned by Gmail)");
-    return info;
+    const info = await transporter.sendMail(mailOptions);
+    console.log("✅ Verification email sent successfully! Message ID:", info.messageId);
   } catch (error) {
-    console.error("❌ Error sending email:", error.message);
+    console.error("❌ Error sending email:", error);
     throw new Error("Failed to send verification email");
   }
 };
