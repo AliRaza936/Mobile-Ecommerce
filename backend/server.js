@@ -32,7 +32,8 @@ app.use(cookieParser());
 
 const allowedOrigins = [
 
-  "https://pricemaart.vercel.app",
+  // "https://pricemaart.vercel.app",
+ "http://localhost:5173",
   
 ];
 
