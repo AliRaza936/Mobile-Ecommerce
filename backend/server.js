@@ -30,12 +30,18 @@ app.use(express.json())
 app.use(cookieParser());
 
 
+// const allowedOrigins = [
+
+//   "https://pricemaart.vercel.app",
+  
+// ];
 const allowedOrigins = [
 
   // "https://pricemaart.vercel.app",
  "http://localhost:5173",
   
 ];
+
 
 app.use(cors({
   origin: allowedOrigins,
