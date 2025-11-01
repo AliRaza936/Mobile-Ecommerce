@@ -40,7 +40,7 @@ const SignUp = () => {
 
   const signInWithGoogle = () => {
     const auth = getAuth(app);
-    setIsLoading(true)
+
     signInWithPopup(auth, googleProvider).then((result) => {
       const user = result.user;
       const fields = {
