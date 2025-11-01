@@ -44,6 +44,7 @@ const handleClickShowPassword = () => setShowPassword(!showPassword);
 
 
 let signInWithGoogle = ()=>{
+  setIsLoading(true)
   const auth = getAuth(app);
 signInWithPopup(auth, googleProvider)
   .then((result) => {
@@ -54,7 +55,7 @@ signInWithPopup(auth, googleProvider)
     const user = result.user;
     // IdP data available using getAdditionalUserInfo(result)
     // ...
-    console.log(result)
+   
     const fields  = {
         name: user.displayName ?? '', // directly from `user`, not `providerData`
         email: user.email ?? '',
@@ -66,6 +67,7 @@ signInWithPopup(auth, googleProvider)
       phone: user.providerData[0].phoneNumber == null ? '' : user.providerData[0].phoneNumber
 
     }
+
     dispatch(withGoogle(fields))
           .unwrap()
           .then((response) => {
