@@ -43,8 +43,10 @@ try {
     withCredentials: true,
     headers: { "Content-Type": "application/json" },
   })
+  console.log(axiosResponce)
   return axiosResponce.data
 } catch (error) {
+  console.log(error)
   let errorMessage  = error?.response?.data?.message ||error.message || "Something went wrong. Please try again!"
   return Promise.reject(errorMessage)
 }  

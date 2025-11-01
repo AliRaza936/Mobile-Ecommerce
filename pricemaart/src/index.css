@@ -304,8 +304,8 @@ td {
     width: 100% !important;
   }
   .loader{
-    width: 30px !important;
-    height: 30px !important;
+    width: 20px !important;
+    height: 20px !important;
     display: flex !important;
     align-items: center !important;
   }

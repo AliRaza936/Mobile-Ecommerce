@@ -28,6 +28,7 @@ let handleChange = (e) => {
   }
 
 let context = useContext(MyContext)
+
   const handleRequestOTP = (e) => {
     e.preventDefault();
     // Call API to send OTP to email
@@ -63,9 +64,10 @@ setLoading(false)
     
   };
 
- const handleResetPassword = (e) => {
+const handleResetPassword = (e) => {
   e.preventDefault();
   setError("");
+  setLoading(true); // ✅ add this here
 
   const trimmedOtp = formField.otpCode.trim();
   const trimmedPassword = formField.password.trim();
@@ -73,21 +75,19 @@ setLoading(false)
 
   if (trimmedOtp.length !== 6) {
     setError("OTP must be exactly 6 digits.");
+    setLoading(false);
     return;
   }
 
-  if (trimmedPassword === '') {
-    context?.setOpen?.({ open: true, message: "Password cannot be blank!", severity: "error" });
-    return;
-  }
-
-  if (trimmedConfirmPassword === '') {
-    context?.setOpen?.({ open: true, message: "Confirm password cannot be blank!", severity: "error" });
+  if (trimmedPassword === '' || trimmedConfirmPassword === '') {
+    context?.setOpen?.({ open: true, message: "Password fields cannot be blank!", severity: "error" });
+    setLoading(false);
     return;
   }
 
   if (trimmedPassword !== trimmedConfirmPassword) {
     context?.setOpen?.({ open: true, message: "Both passwords do not match", severity: "error" });
+    setLoading(false);
     return;
   }
 
@@ -101,6 +101,7 @@ setLoading(false)
   dispatch(reset(payload))
     .unwrap()
     .then((response) => {
+      setLoading(false);
       if (response?.success === true) {
         context?.setOpen?.({ open: true, message: response.message, severity: "success" });
         navigate("/login");
@@ -109,9 +110,15 @@ setLoading(false)
       }
     })
     .catch((error) => {
+      setLoading(false);
       context?.setOpen?.({ open: true, message: error, severity: "error" });
     });
 };
+useEffect(() => {
+  if (step === 2) {
+    document.getElementById("otpInput")?.focus();
+  }
+}, [step]);
 
 
   return (
@@ -133,25 +140,27 @@ setLoading(false)
               onChange={handleChange}
               required
             />
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition"
-            >
-              {loading ? 'Sending...':'Send OTP'}
-            </button>
+           <button
+  type="submit"
+  className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition disabled:opacity-50"
+  disabled={loading}
+>
+  {loading ? 'Sending...' : 'Send OTP'}
+</button>
+
           </form>
         ) : (
           <form onSubmit={handleResetPassword}>
             <label className="block mb-2 text-gray-600">Enter OTP</label>
-            <input
-              type="text"
-              className="w-full p-2 border border-gray-300 rounded mb-4"
-              placeholder="6-digit OTP"
-              value={formField.otpCode}
-              name="otpCode"
-              onChange={handleChange}
-            
-            />
+           <input
+  type="text"
+  maxLength="6"
+  className="w-full p-2 border border-gray-300 rounded mb-4"
+  placeholder="6-digit OTP"
+  value={formField.otpCode}
+  name="otpCode"
+  onChange={handleChange}
+/>
 
             <label className="block mb-2 text-gray-600">New Password</label>
             <input

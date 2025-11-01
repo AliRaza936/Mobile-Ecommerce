@@ -8,9 +8,9 @@ let userSchema = new mongoose.Schema({
     },
     password: { type: String, trim:true },
     role: { type: String, enum: ["user", "admin","testAdmin"], default: "user" },
-    otpExpires:{type:Date,default:null},
-    otpCode: { type: String,default:null },
-    verified: { type: Boolean, default: false },
+    // otpExpires:{type:Date,default:null},
+    // otpCode: { type: String,default:null },
+    // verified: { type: Boolean, default: false },
 },{timestamps:true})
 
 export default mongoose.model('User',userSchema)

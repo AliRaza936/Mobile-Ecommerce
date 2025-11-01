@@ -177,7 +177,7 @@ function App() {
       }, new Array(12).fill(null).map((_, i) => ({ month: months[i], totalSales: 0 })));
 
       setSalesData(salesByMonth);
-      console.log(salesByMonth)
+     
     } catch (error) {
 
       console.error("Error updating status:", error);
@@ -224,10 +224,10 @@ function App() {
   if(result?.data?.success== false){
       setRole("user")
         }    
-      console.log('ndalfnl',result.data.user);
+
       setUserData(result?.data?.user);
-  setRole(result?.data?.user?.role )
-  console.log(result.data.user.role)
+
+  
       // Check if the current pathname is for an admin route and if the user is an admin
       const currentPath = window.location.pathname;
       if (currentPath.startsWith('/admin') && result?.data?.user?.role !== 'admin' && result?.data?.user?.role !== 'testAdmin') {
@@ -333,7 +333,7 @@ useEffect(()=>{
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(result)
+     
       setAccessory(result?.data?.accessories)
     } catch (error) {
       console.log(error);

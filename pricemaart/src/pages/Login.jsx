@@ -11,11 +11,20 @@ import logo from '/logo.png'
 import { useDispatch } from 'react-redux';
 import { login, withGoogle } from '../store/feature/auth/authSlice';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { IconButton, InputAdornment } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+
 
 import {app} from '../firebase'
 // const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider()
 const Login = () => {
+
+
+  const [showPassword, setShowPassword] = useState(false);
+
+const handleClickShowPassword = () => setShowPassword(!showPassword);
+
     let context = useContext(MyContext)
     let dispatch =  useDispatch()
     let navigate = useNavigate()
@@ -167,12 +176,33 @@ let payload = {
                     <TextField type='email' className="w-full" label="Email" variant="standard" name="email" onChange={handleChange}/>
                     </div>
                     <div className="mt-4">
-                    <TextField  className="w-full" label="Password" variant="standard" name="password" onChange={handleChange} />
+                    <TextField
+  className="w-full"
+  label="Password"
+  variant="standard"
+  name="password"
+  type={showPassword ? "text" : "password"}
+  onChange={handleChange}
+  InputProps={{
+    endAdornment: (
+      <InputAdornment position="end">
+        <IconButton
+          onClick={handleClickShowPassword}
+          edge="end"
+          aria-label="toggle password visibility"
+        >
+          {showPassword ? <VisibilityOff /> : <Visibility />}
+        </IconButton>
+      </InputAdornment>
+    ),
+  }}
+/>
+
                     </div>
                     <div>
-                    <Link to={'/forgot-password'}  className="text-blue-700 group hover:text-black inline-block"><p className="font-semibold text-[14px] mt-3 ">Forget Password?</p>
-                   <hr className="w-0 border-t border-black mt-1  group-hover:w-[110px] transition-all duration-300 " />
-                    </Link>
+                    {/* <Link to={'/forgot-password'}  className="text-blue-700 group hover:text-black inline-block"><p className="font-semibold text-[14px] mt-3 ">Forget Password?</p> */}
+                   {/* <hr className="w-0 border-t border-black mt-1  group-hover:w-[110px] transition-all duration-300 " />
+                    </Link> */}
                     </div>
             </div>
 

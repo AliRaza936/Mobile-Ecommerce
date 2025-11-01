@@ -1,5 +1,5 @@
 import express from 'express'
-import {  allUsers, authWithGoogle, changePassword, deleteUser, forgetPassowrd, logoutPage, resetPassword, signin, signUp, singleUser, updateUser, verifyOTP } from './controller.js'
+import {  allUsers, authWithGoogle, changePassword, deleteUser ,logoutPage, signin, signUp, singleUser, updateUser } from './controller.js'
 import {authMiddleware} from '../middleWare/authMiddleWare.js'
 
 
@@ -8,10 +8,10 @@ let userRoutes = express.Router()
 userRoutes.post('/authWithGoogle',authWithGoogle)
 
 
- userRoutes.post('/verifyotp',verifyOTP)
+//  userRoutes.post('/verifyotp',verifyOTP)
 userRoutes.post('/signin',signin)
-userRoutes.post('/forgotpassword',forgetPassowrd)
-userRoutes.post('/reset',resetPassword)
+// userRoutes.post('/forgotpassword',forgetPassowrd)
+// userRoutes.post('/reset',resetPassword)
 userRoutes.get('/logout',logoutPage)
 
 userRoutes.get('/all',allUsers)
