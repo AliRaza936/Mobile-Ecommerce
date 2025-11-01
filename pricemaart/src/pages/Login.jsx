@@ -44,7 +44,7 @@ const handleClickShowPassword = () => setShowPassword(!showPassword);
 
 
 let signInWithGoogle = ()=>{
-  setIsLoading(true)
+
   const auth = getAuth(app);
 signInWithPopup(auth, googleProvider)
   .then((result) => {
